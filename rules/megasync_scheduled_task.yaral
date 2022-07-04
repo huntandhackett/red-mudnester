@@ -1,0 +1,15 @@
+rule megasync_scheduled_task {
+  meta:
+    author      = "Hunt & Hackett"
+    description = "Possible data exfiltration using MEGAsync or MEGAcmd."
+    reference   = "https://attack.mitre.org/techniques/T1567/002/"
+  events:
+    ($e.metadata.event_type = "SCHEDULED_TASK_CREATION" or
+    $e.metadata.event_type = "SCHEDULED_TASK_MODIFICATION" or
+    $e.metadata.event_type = "SCHEDULED_TASK_UNCATEGORIZED")
+
+    $e.target.resource.name = /MEGAsync|MEGAcmd/ nocase
+  condition:
+    $e
+
+}

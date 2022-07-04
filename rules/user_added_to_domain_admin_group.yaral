@@ -1,0 +1,11 @@
+rule user_added_to_domain_admin_group {
+  meta:
+    author      = "Hunt & Hackett"
+    description = "User added to Domain Admins group"
+    reference   = "https://attack.mitre.org/techniques/T1078/002/"
+  events:
+    $event.metadata.product_event_type     = "4728"
+    $event.target.group.group_display_name = "Domain Admins"
+  condition:
+    $event
+}

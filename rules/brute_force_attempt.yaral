@@ -1,0 +1,14 @@
+rule brute_force_attempt {
+  meta:
+    author      = "Hunt & Hackett"
+    description = "Authentication failures on a single account which may indicate a brute force attempt"
+    reference   = "https://attack.mitre.org/techniques/T1110/001/"
+  events:
+    $e.metadata.product_event_type = "4625"
+    $e.extensions.auth.auth_details = /(3|10)/
+    $e.principal.user.userid = $user
+  match:
+    $user over 5m
+  condition:
+    $e and #e > 10
+}

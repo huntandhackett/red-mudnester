@@ -1,0 +1,15 @@
+﻿Type,IOC,Description
+File name,bu.exe,Ransomware
+File name,buren_cryptor.exe,Ransomware
+File name,spools.exe,Cobalt Strike
+File name,tni.exe,Total Network Inventory
+File name,MEGAsync.exe,MEGAsync
+File name,MEGAupdater.exe,MEGAsync
+Hash (SHA1),899b02fa31b29c67437b67bff8959d8dee288d9d,"bu.exe, buren_cryptor.exe"
+Hash (SHA1),d92522dcaec6a3d22a1b05d8f5c9ebae08ec74da,MEGAsync.exe
+Hash (SHA1),4e7578c638d480da1c3b3b3b54f46b153717981d,MEGAupdater.exe
+Scheduled Task,MEGAsync Update,MEGAsync update task
+Scheduled Task,\crypt!,Used to execute the ransomware
+Folder name,C:\tmp,Used to distribute the ransomware with the Scheduled Task \crypt!
+Folder name,C:\Windows\Temp,Used for storing Cobalt Strike and Total Network Inventory
+Folder name,C:\users\<USER>\Desktop,"From this location MEGAsync, PCHunter, bu.exe and buren_cryptor.exe were executed"

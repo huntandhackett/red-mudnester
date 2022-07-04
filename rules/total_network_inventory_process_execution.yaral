@@ -1,0 +1,12 @@
+rule total_network_inventory_process_execution {
+  meta:
+    author      = "Hunt & Hackett"
+    description = "Total Network Inventory process execution"
+    reference   = "https://attack.mitre.org/techniques/T1046/"
+  events:
+    $event.metadata.event_type = "PROCESS_LAUNCH"
+    ($event.target.process.file.full_path = /(\\Total Network Inventory\\|\\tni.exe)/ nocase or
+    $event.target.process.command_line = /(\\Total Network Inventory\\|\\tni.exe)/ nocase)
+  condition:
+    $event
+}

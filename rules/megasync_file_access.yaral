@@ -1,0 +1,17 @@
+rule megasync_file_access {
+  meta:
+    author      = "Hunt & Hackett"
+    description = "Possible data exfiltration using MEGAsync / MEGAcmd."
+    reference   = "https://attack.mitre.org/techniques/T1567/002/"
+  events:
+    ($e.metadata.event_type = "FILE_OPEN" or
+    $e.metadata.event_type = "FILE_READ" or
+    $e.metadata.event_type = "FILE_CREATION" or
+    $e.metadata.event_type = "FILE_MODIFICATION" or
+    $e.metadata.event_type = "FILE_UNCATEGORIZED")
+
+    ($e.target.process.file.full_path = /MEGAsync|MEGAcmd/ nocase or
+    $e.target.process.command_line = /MEGAsync|MEGAcmd/ nocase)
+  condition:
+    $e
+}

@@ -1,0 +1,16 @@
+rule total_network_inventory_file_access {
+  meta:
+    author      = "Hunt & Hackett"
+    description = "Total Network Inventory file access"
+    reference   = "https://attack.mitre.org/techniques/T1046/"
+  events:
+    ($event.metadata.event_type = "FILE_OPEN" or
+    $event.metadata.event_type = "FILE_READ" or
+    $event.metadata.event_type = "FILE_CREATION" or
+    $event.metadata.event_type = "FILE_MODIFICATION" or
+    $event.metadata.event_type = "FILE_UNCATEGORIZED")
+
+    $event.target.file.full_path = /\\Total Network Inventory/ nocase
+  condition:
+    $event
+}

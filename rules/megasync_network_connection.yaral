@@ -1,0 +1,18 @@
+rule megasync_network_connection {
+  meta:
+    author      = "Hunt & Hackett"
+    description = "Possible data exfiltration using MEGAsync or MEGAcmd."
+    reference   = "https://attack.mitre.org/techniques/T1567/002/"
+  events:
+    ($e.metadata.event_type = "NETWORK_DNS" or
+    $e.metadata.event_type = "NETWORK_HTTP" or
+    $e.metadata.event_type = "NETWORK_CONNECTION")
+    
+    $e.target.hostname = /mega.co.nz/ nocase
+
+    $e.principal.process.file.full_path != /c\:\\program files(.*)\\google\\chrome\\application\\chrome.exe/ nocase
+    $e.principal.process.file.full_path != /c\:\\program files(.*)\\mozilla\ firefox\\firefox.exe/ nocase
+    $e.principal.process.file.full_path != /c\:\\program files(.*)\\microsoft\\edge\\application\\msedge.exe/ nocase
+  condition:
+    $e
+}

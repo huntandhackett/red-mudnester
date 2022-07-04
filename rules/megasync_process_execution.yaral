@@ -1,0 +1,12 @@
+rule megasync_process_execution {
+  meta:
+    author      = "Hunt & Hackett"
+    description = "Possible data exfiltration using MEGAsync or MEGAcmd."
+    reference   = "https://attack.mitre.org/techniques/T1567/002/"
+  events:
+    $e.metadata.event_type = "PROCESS_LAUNCH"
+    ($e.target.process.file.full_path = /MEGAsync|MEGAcmd/ nocase or
+    $e.target.process.command_line = /MEGAsync|MEGAcmd/ nocase)
+  condition:
+    $e
+}
