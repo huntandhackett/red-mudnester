@@ -10,8 +10,7 @@ rule megasync_file_access {
     $e.metadata.event_type = "FILE_MODIFICATION" or
     $e.metadata.event_type = "FILE_UNCATEGORIZED")
 
-    ($e.target.process.file.full_path = /MEGAsync|MEGAcmd/ nocase or
-    $e.target.process.command_line = /MEGAsync|MEGAcmd/ nocase)
+    $e.target.file.full_path = /MEGAsync|MEGAcmd/ nocase
   condition:
     $e
 }
